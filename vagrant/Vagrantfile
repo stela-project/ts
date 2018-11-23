@@ -1,0 +1,73 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+## vagrant documentation: http://docs.vagrantup.com
+
+unless Vagrant.has_plugin?("vagrant-vbguest")
+  raise 'plugin vagrant-vbguest is not installed!'
+end
+
+class HackyGuestAdditionsInstaller < VagrantVbguest::Installers::RedHat
+  def install(opts=nil, &block)
+    super_garbage_hack = <<-EOF
+yum install -y bzip2
+EOF
+    communicate.sudo(super_garbage_hack)
+    super
+  end
+end
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  ## 32 bit 
+  # CURRENTLY NOT AVAILABLE!!
+#  config.vm.box = "centos/7"
+#  config.vm.provider :virtualbox do |vb|
+#    vb.customize [ "modifyvm", :id, "--hwvirtex", "off"]
+#  end
+  ##
+  ## 64 bit 
+  config.vm.box = "centos/7"
+  ##
+
+  ## cpu, ram
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end
+
+  ## guest additions installer
+  config.vbguest.installer = HackyGuestAdditionsInstaller
+
+  ## shared folder
+  config.vm.synced_folder "config/", "/vagrant_config/"
+  config.vm.synced_folder "../src/", "/home/vagrant/public_html/", owner: "vagrant", group: "vagrant"
+  # default shared folder
+  ##config.vm.synced_folder "./", "/vagrant/"
+
+  ## forwarded ports
+  config.vm.network "forwarded_port", guest: 80, host: 8080 
+  config.vm.network "forwarded_port", guest: 9200, host: 9200  
+  config.vm.network "forwarded_port", guest: 5601, host: 5601 
+  config.vm.network "forwarded_port", guest: 3000, host: 3000 
+
+
+  ## hostname
+  config.vm.hostname = "dev.local"
+
+  ## assign IP address
+  # config.vm.network "private_network", ip: "192.168.50.4"
+
+  ## NOTE: 
+  ## to activate DNS, add the following entry to your local hosts file (http://en.wikipedia.org/wiki/Hosts_%28file%29)
+  ## (FORMAT: <IPADRESS> <HOSTNAME>)
+  ##
+  ## 192.168.50.4 dev.local
+
+  ## provision
+  config.vm.provision :shell, :path => "config/shell/base.sh"
+  config.vm.provision :shell, :path => "config/shell/custom.sh"
+end
+
+
