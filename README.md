@@ -1,5 +1,9 @@
 ## STELA-project: Technology stack supporting a learning analytics dashboard
 
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/logo.png" alt="Logo STELA-Project" width="300" height="auto">
+
+### Description
+
 A dashboard is a visual display of the most relevant information, which is consolidated and arranged on a single screen to be monitored at a glance and needed to achieve one or more objectives [1]. A dashboard often present information to resources used, time spent, social interactions, artifacts produced, and exercise and test results [2]. Thus, the students are able to monitor their learning efforts for reaching their intended learning outcomes more easily [3].
 
 For the design and development of the learning analytics dashboard, we determined the following three objectives:
@@ -23,6 +27,20 @@ Further, we wanted to easily combine different technologies, so we decided to go
 Additionally, this approach helped us with our second objective, the transferability to other contexts and the maximization of the mainstreaming potential.
 
 This images shows the final design of our technology stack:
-<img src="https://raw.githubusercontent.com/stela-project/ts/master/ts.jpg" alt="Image of techhnology stack" width="600" height="auto">
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/ts.jpg" alt="Image of techhnology stack" width="600" height="auto">
 
-<b>Acknowledgments.</b> This research project is co-funded by the European Commission Erasmus+ program, in the context of the project 562167-EPP-1-2015-1-BE-EPPKA3-PI-FORWARD. Please visit our website http://stela-project.eu.
+[1] Stephen Few. “Dashboard Confusion, Perceptual edge”. In: (2004).
+
+[2] Erik Duval. “Attention please!: learning analytics for visualization and recommendation”. In: Pro-
+ceedings of the 1st International Conference on Learning Analytics and Knowledge. ACM. 2011,
+pp. 9–17.
+
+[3] Sven Charleer et al. “Creating effective learning analytics dashboards: Lessons lea
+
+### Demo
+
+Find a demo here: <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/stela-project/ts/master/example/index.php/general/index.html" target="_blank">Go to Demo</a>
+
+### Acknowledgments
+
+This research project is co-funded by the European Commission Erasmus+ program, in the context of the project 562167-EPP-1-2015-1-BE-EPPKA3-PI-FORWARD. Please visit our website http://stela-project.eu.
