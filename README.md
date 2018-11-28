@@ -1,5 +1,11 @@
 ## STELA-project: Technology stack supporting a learning analytics dashboard
 
+### Demo
+
+<a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/stela-project/ts/master/example/index.php/general/index.html" target="_blank">Go to Demo</a>
+
+### Description
+
 A dashboard is a visual display of the most relevant information, which is consolidated and arranged on a single screen to be monitored at a glance and needed to achieve one or more objectives [1]. A dashboard often present information to resources used, time spent, social interactions, artifacts produced, and exercise and test results [2]. Thus, the students are able to monitor their learning efforts for reaching their intended learning outcomes more easily [3].
 
 For the design and development of the learning analytics dashboard, we determined the following three objectives:
