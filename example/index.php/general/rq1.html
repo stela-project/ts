@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from 10.244.129.157/index.php/general/rq1 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Nov 2018 14:46:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>SPOC General Dashboard</title>
+
+    <script src="../../assets/js/Chart.bundle.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://10.244.129.157/assets/js/html5shiv.min.js"></script>
+    <script src="http://10.244.129.157/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        function secondsToString(seconds)
+        {
+            var numyears = Math.floor(seconds / 31536000);
+            var numdays = Math.floor((seconds % 31536000) / 86400);
+            var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+            var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+            var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+            return numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+
+        }
+
+        function showToolTips() {
+            $('[data-toggle="tooltip"]').tooltip('show');
+            document.getElementById("showToolTipsLink").style.display = "none";
+            document.getElementById("hideToolTipsLink").style.display = "block"
+        }
+
+        function hideToolTips() {
+            $('[data-toggle="tooltip"]').tooltip('hide');
+            document.getElementById("showToolTipsLink").style.display = "block";
+            document.getElementById("hideToolTipsLink").style.display = "none"
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <img style="margin: 5px; height: 34px; width: auto;" src="../../assets/images/stela-logo.png" />
+            <a class="nav-item nav-link " id="nav-general-tab" href="index.html" role="tab" >General Information</a>
+            <a class="nav-item nav-link " id="nav-user-tab" href="user.html" role="tab" >User Information</a>
+            <a class="nav-item nav-link active" id="nav-rq1-tab" href="rq1.html" role="tab" >Research Question 1</a>
+            <a class="nav-item nav-link " id="nav-rq2-tab" href="rq2.html" role="tab" >Research Question 2</a>
+            <a class="nav-item nav-link " id="nav-rq3-tab" href="rq3.html" role="tab" >Research Question 3</a>
+            </div>
+    </nav>
+    <br /><div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h3>1. Which student factors are related to SPOC activity?</h3>
+        </div>
+    </div>
+</div>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-simple-tab" data-toggle="tab" href="#nav-simple" role="tab" aria-controls="nav-simple" aria-selected="true">Simple</a>
+        <a class="nav-item nav-link" id="nav-advanced-tab" data-toggle="tab" href="#nav-advanced" role="tab" aria-controls="nav-advanced" aria-selected="false">Advanced</a>
+        <a class="nav-item nav-link" id="nav-complex-tab" data-toggle="tab" href="#nav-complex" role="tab" aria-controls="nav-complex" aria-selected="false">Complex</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-simple" role="tabpanel" aria-labelledby="nav-simple-tab">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr class="table-primary">
+                <th>Type (Simple)</th>
+                <th>Count</th>
+                <th>Sum</th>
+                <th>Mean</th>
+                <th>Median</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Traditional Study Track</td>
+                <td>757</td>
+                <td>354 d 15 h 29 min</td>
+                <td>11 h 14 min</td>
+                <td class="bg-warning">5 h 52 min</td>
+            </tr>
+            <tr style="border-bottom: 2px solid;">
+                <td>Non Traditional Study Track</td>
+                <td>290</td>
+                <td>127 d 4 h 56 min</td>
+                <td>10 h 31 min</td>
+                <td class="bg-warning">1 h 29 min</td>
+            </tr>
+            <tr>
+                <td>Normstudent</td>
+                <td>763</td>
+                <td>337 d 14 h 29 min</td>
+                <td>10 h 37 min</td>
+                <td>4 h 48 min</td>
+            </tr>
+            <tr style="border-bottom: 2px solid;">
+                <td>Not Normstudent</td>
+                <td>284</td>
+                <td>144 d 5 h 56 min</td>
+                <td>12 h 11 min</td>
+                <td>3 h 18 min</td>
+            </tr>
+            <tr>
+                <td>Female</td>
+                <td>715</td>
+                <td>320 d 10 h 7 min</td>
+                <td>10 h 45 min</td>
+                <td>4 h 41 min</td>
+            </tr>
+            <tr>
+                <td>Male</td>
+                <td>332</td>
+                <td>161 d 10 h 18 min</td>
+                <td>11 h 40 min</td>
+                <td>3 h 36 min</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-xl-4">
+                <canvas id="pie-chart-traditional"></canvas>
+
+                <script>
+                    // Bar chart
+                    $bar_chart = document.getElementById("pie-chart-traditional");
+
+                    new Chart($bar_chart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Traditional Study Track", "Non Traditional Study Track"],
+                            datasets: [{
+                                label: "Median of Traditional Study Track",
+                                backgroundColor: ["#3e95cd", "#8e5ea2"],
+                                data: [21149 ,5362]
+                            }]
+                        },
+                        options: {
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        return "Median: " + secondsToString(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+            <div class="col-xl-4">
+                <canvas id="pie-chart-normstudent"></canvas>
+
+                <script>
+                    // Bar chart
+                    $bar_chart = document.getElementById("pie-chart-normstudent");
+
+                    new Chart($bar_chart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Normstudent", "Not Normstudent"],
+                            datasets: [{
+                                label: "Median of Normstudent",
+                                backgroundColor: ["#3cba9f","#e8c3b9"],
+                                data: [17331 ,11906]
+                            }]
+                        },
+                        options: {
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        return "Median: " + secondsToString(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+            <div class="col-xl-4">
+                <canvas id="pie-chart-sex"></canvas>
+
+                <script>
+                    // Bar chart
+                    $bar_chart = document.getElementById("pie-chart-sex");
+
+                    new Chart($bar_chart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Female", "Male"],
+                            datasets: [{
+                                label: "Median of Sex",
+                                backgroundColor: ["#c45850","#3e95cd"],
+                                data: [16909 ,13007.5]
+                            }]
+                        },
+                        options: {
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        return "Median: " + secondsToString(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <br />
+        <p><b>Thoughts:</b> The difference between the median of traditional und the non traditional study track is relatively big (highlighted with orange). Whereas the differences at normstudent and sex is much smaller. Also interesting is the fact that the mean sum of the activities at traditional and non traditional study track is nearly the same.</p>
+    </div>
+    <div class="tab-pane fade" id="nav-advanced" role="tabpanel" aria-labelledby="nav-advanced-tab">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr class="table-primary">
+                <th>Type (Advanced)</th>
+                <th>Count</th>
+                <th>Sum</th>
+                <th>Mean</th>
+                <th>Median</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Traditional Study Track and Normstudent</td>
+                <td>616</td>
+                <td>291 d 13 h 49 min</td>
+                <td>11 h 21 min</td>
+                <td>6 h 15 min</td>
+            </tr>
+            <tr>
+                <td>Traditional Study Track and not Normstudent</td>
+                <td>141</td>
+                <td>63 d 1 h 40 min</td>
+                <td>10 h 44 min</td>
+                <td>3 h 11 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Normstudent</td>
+                <td>147</td>
+                <td>46 d 40 min</td>
+                <td >7 h 30 min</td>
+                <td class="bg-warning">24 min</td>
+            </tr>
+            <tr style="border-bottom: 2px solid;">
+                <td>Non Traditional Study Track and not Normstudent</td>
+                <td>143</td>
+                <td>81 d 4 h 16 min</td>
+                <td>13 h 37 min</td>
+                <td>3 h 46 min</td>
+            </tr>
+            <tr>
+                <td>Normstudent and Female</td>
+                <td>532</td>
+                <td>226 d 22 h 21 min</td>
+                <td>10 h 14 min</td>
+                <td>5 h </td>
+            </tr>
+            <tr>
+                <td>Normstudent and Male</td>
+                <td>231</td>
+                <td>110 d 16 h 8 min</td>
+                <td>11 h 29 min</td>
+                <td>4 h 20 min</td>
+            </tr>
+            <tr>
+                <td>Not Normstudent and Female</td>
+                <td>183</td>
+                <td>93 d 11 h 46 min</td>
+                <td>12 h 15 min</td>
+                <td>4 h 11 min</td>
+            </tr>
+            <tr style="border-bottom: 2px solid;">
+                <td>Not Normstudent and Male</td>
+                <td>101</td>
+                <td>50 d 18 h 10 min</td>
+                <td>12 h 3 min</td>
+                <td class="bg-warning">2 h 51 min</td>
+            </tr>
+
+            <tr>
+                <td>Traditional Study Track and Female</td>
+                <td>525</td>
+                <td>231 d 15 h 10 min</td>
+                <td>10 h 35 min</td>
+                <td>5 h 57 min</td>
+            </tr>
+            <tr>
+                <td>Traditional Study Track and Male</td>
+                <td>232</td>
+                <td>123 d 18 min</td>
+                <td>12 h 43 min</td>
+                <td>5 h 51 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Female</td>
+                <td>190</td>
+                <td>88 d 18 h 57 min</td>
+                <td>11 h 12 min</td>
+                <td>1 h 49 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Male</td>
+                <td>100</td>
+                <td>38 d 9 h 59 min</td>
+                <td>9 h 13 min</td>
+                <td class="bg-warning">1 h 29 min</td>
+            </tr>
+            </tbody>
+        </table>
+        <br />
+        <p><b>Thoughts:</b> Again non traditional study track in combination with either normstudent or male show the least activity on the platform (highlighted with orange). Interesting is also that not normstudents in combination with male has also a low activity rate.</p>
+    </div>
+    <div class="tab-pane fade" id="nav-complex" role="tabpanel" aria-labelledby="nav-complex-tab">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr class="table-primary">
+                <th>Type (Complex)</th>
+                <th>Count</th>
+                <th>Sum</th>
+                <th>Mean</th>
+                <th>Median</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Traditional Study Track and Normstudent and Female</td>
+                <td>427</td>
+                <td>191 d 3 h 58 min</td>
+                <td>10 h 44 min</td>
+                <td>6 h 23 min</td>
+            </tr>
+            <tr>
+                <td>Traditional Study Track and Normstudent and Male</td>
+                <td>189</td>
+                <td>100 d 9 h 50 min</td>
+                <td>12 h 45 min</td>
+                <td>6 h 13 min</td>
+            </tr>
+            <tr>
+                <td>Traditional Study Track and Not Normstudent and Female</td>
+                <td>98</td>
+                <td>40 d 11 h 12 min</td>
+                <td>9 h 54 min</td>
+                <td>2 h 54 min</td>
+            </tr>
+            <tr >
+                <td>Traditional Study Track and Not Normstudent and Male</td>
+                <td>43</td>
+                <td>22 d 14 h 28 min</td>
+                <td>12 h 36 min</td>
+                <td>4 h 9 min</td>
+            </tr>
+
+            <tr>
+                <td>Non Traditional Study Track and Normstudent and Female</td>
+                <td>105</td>
+                <td>35 d 18 h 22 min</td>
+                <td>8 h 10 min</td>
+                <td>36 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Normstudent and Male</td>
+                <td>42</td>
+                <td>10 d 6 h 17 min</td>
+                <td>5 h 51 min</td>
+                <td class="bg-warning">5 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Not Normstudent and Female</td>
+                <td>85</td>
+                <td>53 d 34 min</td>
+                <td>14 h 58 min</td>
+                <td>4 h 48 min</td>
+            </tr>
+            <tr>
+                <td>Non Traditional Study Track and Not Normstudent and Male</td>
+                <td>58</td>
+                <td>28 d 3 h 42 min</td>
+                <td class="bg-success">11 h 39 min</td>
+                <td class="bg-warning">2 h 22 min</td>
+            </tr>
+            </tbody>
+        </table>
+            <br />
+                <canvas id="pie-chart-complex"></canvas>
+                <script>
+                    // Bar chart
+                    $bar_chart = document.getElementById("pie-chart-complex");
+
+                    new Chart($bar_chart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Traditional Study Track and Normstudent and Female", "Traditional Study Track and Normstudent and Male", "Traditional Study Track and Not Normstudent and Female", "Traditional Study Track and Not Normstudent and Male", "Non Traditional Study Track and Normstudent and Female", "Non Traditional Study Track and Normstudent and Male", "Non Traditional Study Track and Not Normstudent and Female", "Non Traditional Study Track and Not Normstudent and Male"],
+                            datasets: [{
+                                label: "Median of Traditional Study Track",
+                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#9c4ab2","#4c3a5b","#f4d6d7"],
+                                data: [22990 ,22432 ,10485 ,
+                                    14994 ,2189 ,314.5 ,
+                                    17298 ,8568]
+                            }]
+                        },
+                        options: {
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        return "Median: " + secondsToString(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+        <p><b>Thoughts:</b> Also when looking at the results when combining all three parameters, the non traditional study track in combination with male (for norm- and not normstudents) is low (highlighted with orange). Of interest is the high mean sum at "Non Traditional Study Track and Not Normstudent and Male" (highlighted with green), which implicates that some of these users have a very high activity time on the platform.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/popper.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../assets/js/bootstrap.min.js"></script>
+</body>
+
+<!-- Mirrored from 10.244.129.157/index.php/general/rq1 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Nov 2018 14:46:06 GMT -->
+</html>

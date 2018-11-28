@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from 10.244.129.157/index.php/general/rq3 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Nov 2018 14:46:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>SPOC General Dashboard</title>
+
+    <script src="../../assets/js/Chart.bundle.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://10.244.129.157/assets/js/html5shiv.min.js"></script>
+    <script src="http://10.244.129.157/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        function secondsToString(seconds)
+        {
+            var numyears = Math.floor(seconds / 31536000);
+            var numdays = Math.floor((seconds % 31536000) / 86400);
+            var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+            var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+            var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+            return numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+
+        }
+
+        function showToolTips() {
+            $('[data-toggle="tooltip"]').tooltip('show');
+            document.getElementById("showToolTipsLink").style.display = "none";
+            document.getElementById("hideToolTipsLink").style.display = "block"
+        }
+
+        function hideToolTips() {
+            $('[data-toggle="tooltip"]').tooltip('hide');
+            document.getElementById("showToolTipsLink").style.display = "block";
+            document.getElementById("hideToolTipsLink").style.display = "none"
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <img style="margin: 5px; height: 34px; width: auto;" src="../../assets/images/stela-logo.png" />
+            <a class="nav-item nav-link " id="nav-general-tab" href="index.html" role="tab" >General Information</a>
+            <a class="nav-item nav-link " id="nav-user-tab" href="user.html" role="tab" >User Information</a>
+            <a class="nav-item nav-link " id="nav-rq1-tab" href="rq1.html" role="tab" >Research Question 1</a>
+            <a class="nav-item nav-link " id="nav-rq2-tab" href="rq2.html" role="tab" >Research Question 2</a>
+            <a class="nav-item nav-link active" id="nav-rq3-tab" href="rq3.html" role="tab" >Research Question 3</a>
+            </div>
+    </nav>
+    <br /><div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h3>3. Do SPOC participants who are more active have  higher chance of study success in the entrance exam?</h3>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr class="table-primary">
+        <th>Type (Simple)</th>
+        <th>Count</th>
+        <th>Percantage</th>
+        <th>Sum</th>
+        <th>Mean</th>
+        <th>Median</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+                        <td>Traditional Study Track and Passed GNGfinal</td>
+        <td>209</td>
+        <td>54%</td>
+        <td>147 d 22 h 54 min</td>
+        <td>16 h 59 min</td>
+        <td class="bg-warning">14 h 24 min</td>
+    </tr>
+    <tr style="border-bottom: 2px solid;">
+        <td>Traditional Study Track and failed GNGfinal</td>
+        <td>179</td>
+        <td>46%</td>
+        <td>72 d 15 h 2 min</td>
+        <td>9 h 44 min</td>
+        <td class="bg-success">3 h 4 min</td>
+    </tr>
+    <tr>
+                        <td>Non Traditional Study Track and Passed GNGfinal</td>
+        <td>14</td>
+        <td>17%</td>
+        <td>17 d 6 h 6 min</td>
+        <td>1 d 5 h 34 min</td>
+        <td class="bg-warning">1 d 17 h 27 min</td>
+    </tr>
+    <tr>
+        <td>Non Traditional Study Track and Failed GNGfinal</td>
+        <td>67</td>
+        <td>83%</td>
+        <td>37 d 5 h 24 min</td>
+        <td>13 h 20 min</td>
+        <td class="bg-success">5 h 28 min</td>
+    </tr>
+    </tbody>
+</table>
+<br />
+<canvas id="pie-chart-rq3"></canvas>
+<script>
+    // Bar chart
+    $bar_chart = document.getElementById("pie-chart-rq3");
+
+    new Chart($bar_chart, {
+        type: 'pie',
+        data: {
+            labels: ["Traditional Study Track and Passed GNGfinal", "Traditional Study Track and failed GNGfinal", "Non Traditional Study Track and Passed GNGfinal", "Non Traditional Study Track and Failed GNGfinal"],
+            datasets: [{
+                label: "Median of Traditional Study Track",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#9c4ab2","#4c3a5b","#f4d6d7"],
+                data: [51840, 11055, 149240.5, 19709]
+            }]
+        },
+        options: {
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return "Median: " + secondsToString(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                    }
+                }
+            }
+        }
+    });
+</script>
+<br />
+<p>
+    <b>Thoughts:</b>
+    In general, we may say that SPOC participants who are more active have a higher chance of study success in the entrance exam. And again in contrast to research question 1, the students with a non traditional study track are more active than those with a tradtional study track.
+</p>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/popper.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../assets/js/bootstrap.min.js"></script>
+</body>
+
+<!-- Mirrored from 10.244.129.157/index.php/general/rq3 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Nov 2018 14:46:07 GMT -->
+</html>
