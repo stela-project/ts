@@ -1,6 +1,6 @@
 ## STELA-project: Technology stack supporting a learning analytics dashboard
 
-<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/logo.png" alt="Logo STELA-Project" width="300" height="auto">
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/logo.png" alt="Logo STELA-Project" width="200" height="auto"> 
 
 ### Description
 
