@@ -1,5 +1,7 @@
 ## STELA-project: Technology stack supporting a learning analytics dashboard
 
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/logo.png" alt="Logo STELA-Project" width="300" height="auto">
+
 ### Description
 
 A dashboard is a visual display of the most relevant information, which is consolidated and arranged on a single screen to be monitored at a glance and needed to achieve one or more objectives [1]. A dashboard often present information to resources used, time spent, social interactions, artifacts produced, and exercise and test results [2]. Thus, the students are able to monitor their learning efforts for reaching their intended learning outcomes more easily [3].
@@ -25,7 +27,7 @@ Further, we wanted to easily combine different technologies, so we decided to go
 Additionally, this approach helped us with our second objective, the transferability to other contexts and the maximization of the mainstreaming potential.
 
 This images shows the final design of our technology stack:
-<img src="https://raw.githubusercontent.com/stela-project/ts/master/ts.jpg" alt="Image of techhnology stack" width="600" height="auto">
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/ts.jpg" alt="Image of techhnology stack" width="600" height="auto">
 
 [1] Stephen Few. “Dashboard Confusion, Perceptual edge”. In: (2004).
 
