@@ -2,6 +2,86 @@
 
 <img src="https://raw.githubusercontent.com/stela-project/ts/master/images/logo.png" alt="Logo STELA-Project" width="200" height="auto"> 
 
+### Quick start guide
+1) Open command line (recommended for Windows: git-bash) 
+2) Go to subfolder "vagrant" 
+3) Install a plugin which will install the 'VirtualBox Guest Additional Tools': "vagrant plugin install vagrant-vbguest"
+4) Start the virtual machine: "vagrant up"
+5) On the host open a browser and go to http://localhost:8080 
+6) Shutdown the virtual machine: "vagrant halt"
+
+### Setup information
+
+The basic setup takes place in the _custom.sh_ script,  but the important setup concerning our technology stack happens in the _custom.sh_. Both are located at _vagrant/config/shell_.
+
+#### Data collection
+
+```sh
+# logstash
+echo "install logstash .."
+
+echo "
+[logstash-6.x]
+name=Elastic repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+ " > /etc/yum.repos.d/logstash.repo
+
+yum install -y logstash
+
+systemctl enable logstash.service
+systemctl start logstash.service
+```
+
+#### Search & information processing
+
+```sh
+## import elastic package key see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+echo "install elastic package .."
+rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+## elasticsearch
+echo "install elastic search .."
+
+echo "
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+" > /etc/yum.repos.d/elasticsearch.repo
+yum install -y elasticsearch
+
+systemctl enable elasticsearch.service
+systemctl start elasticsearch.service
+
+sleep 15
+
+# elasticsearch config
+cp /vagrant_config/files/elkstack/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+sudo /etc/init.d/elasticsearch restart
+
+[...]
+
+## postgres
+echo "create database.."
+su - postgres -c 'createuser stela'
+su - postgres -c 'createdb -O stela stela'
+```
+
+Additionally, the PHP-framework CodeIgnitor (https://codeigniter.com/) was used to combine the strengths of elasticsearch and postgres. It enables the postprocession of the data and prepares it for presentation and visualization. It is located in the _src_ folder, but the model, view and controller may be found at _src/application_.
+
+#### Data presentation
+
+For the data presentation the library Charts.js was used - Link: https://www.chartjs.org/. It is inserted in the header of the CodeIgnitor-Framework and located at _src/assets/js/Chart.bundle.min.js_.
+
 ### Description
 
 A dashboard is a visual display of the most relevant information, which is consolidated and arranged on a single screen to be monitored at a glance and needed to achieve one or more objectives [1]. A dashboard often present information to resources used, time spent, social interactions, artifacts produced, and exercise and test results [2]. Thus, the students are able to monitor their learning efforts for reaching their intended learning outcomes more easily [3].
