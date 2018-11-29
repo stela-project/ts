@@ -76,11 +76,42 @@ su - postgres -c 'createuser stela'
 su - postgres -c 'createdb -O stela stela'
 ```
 
-Additionally, the PHP-framework CodeIgnitor (https://codeigniter.com/) was used to combine the strengths of elasticsearch and postgres. It enables the postprocession of the data and prepares it for presentation and visualization. It is located in the _src_ folder, but the model, view and controller may be found at _src/application_.
+Additionally, the PHP-framework CodeIgnitor (https://codeigniter.com/) was used to combine the strengths of elasticsearch and postgres. It enables the postprocessing of the data and prepares it for presentation and visualization. It is located in the _src_ folder, but the model, view and controller may be found at _src/application_.
 
 #### Data presentation
 
 For the data presentation the library Charts.js was used - Link: https://www.chartjs.org/. It is inserted in the header of the CodeIgnitor-Framework and located at _src/assets/js/Chart.bundle.min.js_.
+
+<b>Example visualization</b>
+```html
+<canvas id="bar-chart-total-time-spent-on-system" style="display: block; height: 262px; width: 525px;" width="656" height="327" class="chartjs-render-monitor"></canvas>
+<script>
+    // Bar chart
+    $bar_chart = document.getElementById("bar-chart-total-time-spent-on-system");
+    new Chart($bar_chart, {
+        type: 'bar',
+        data: {
+            labels: ["< 1 min",
+                "1 min - 10 h ","10 h  - 20 h ","20 h  - 1 d 6 h ", "> 1 d 6 h "],
+            datasets: [
+                {
+                    label: "User",
+                    backgroundColor: ["#3e95cd","#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [259,389,188,85,125]                            }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                text: "Total time spent on the system per user",
+                display: true
+            },
+            responsive: true
+        }
+    });
+</script>
+```
+<img src="https://raw.githubusercontent.com/stela-project/ts/master/images/time_spent_on_system_per_user.png" alt="Charts.js example" width="600" height="auto"> 
 
 ### Description
 
